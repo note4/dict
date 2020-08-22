@@ -1,0 +1,8 @@
+---
+word: Hinovel
+meaning: 小说App名称
+correct: / ə'dəʊbɪ /
+wrong: 一个逗比
+note: 嗨小说
+category: 品牌名称
+---
