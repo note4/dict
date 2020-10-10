@@ -14,14 +14,6 @@ title: Anyway.ABC 安妮薇术语小词典
       <div>单词</div>
     </div>
 
-    <div class="meaning">
-      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <path d="M11 44l-8 8 8 8m42-40l8-8-8-8"></path>
-        <path d="M60.8 12H12A10 10 0 0 0 2 22a10 10 0 0 0 10 10h40a10 10 0 0 1 10 10 10 10 0 0 1-10 10H3"></path>
-      </svg>
-      <div>翻译</div>
-    </div>
-
     <div class="correct">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xmlns:xlink="http://www.w3.org/1999/xlink">
         <path d="M15.74 30l12 14 34-42"></path>
@@ -30,12 +22,12 @@ title: Anyway.ABC 安妮薇术语小词典
       <div>正确<span class="mobile-hide">发音</span></div>
     </div>
 
-    <div class="wrong">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <circle cx="32.001" cy="32" r="30"></circle>
-        <path d="M42.999 21.001l-22 22m22 0L21 21"></path>
+    <div class="meaning">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <path d="M11 44l-8 8 8 8m42-40l8-8-8-8"></path>
+        <path d="M60.8 12H12A10 10 0 0 0 2 22a10 10 0 0 0 10 10h40a10 10 0 0 1 10 10 10 10 0 0 1-10 10H3"></path>
       </svg>
-      <div><span class="mobile-hide">常见</span>错误<span class="mobile-hide">发音</span></div>
+      <div>翻译</div>
     </div>
 
     <div class="note mobile-hide">
@@ -44,6 +36,14 @@ title: Anyway.ABC 安妮薇术语小词典
         <path d="M10 20h14m-14 8h14m-14 8h14m16-16h14m-14 8h14m-14 8h14"></path>
       </svg>
       <div>备注</div>
+    </div>
+
+    <div class="wrong">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <circle cx="32.001" cy="32" r="30"></circle>
+        <path d="M42.999 21.001l-22 22m22 0L21 21"></path>
+      </svg>
+      <div><span class="mobile-hide">常见</span>错误<span class="mobile-hide">发音</span></div>
     </div>
 
   </div>
@@ -55,7 +55,6 @@ title: Anyway.ABC 安妮薇术语小词典
     {% for post in site.categories[category_name ] %}
     <div class="item" :class=" nowPlaying == true & currentWord == '{{ post.title  | downcase }}' ? 'playing' : '' ">
       <div class="word"><span>{{ post.word }}</span></div>
-      <div class="meaning">{{ post.meaning }}</div>
       <div class="correct">{{ post.correct }}
         {% if post.short == 1 %}
         
@@ -70,6 +69,8 @@ title: Anyway.ABC 安妮薇术语小词典
         {% endif %}
 
       </div>
+      <div class="meaning">{{ post.meaning }}</div>
+      <div class="note"><span>{{ post.note }}<span></div>
       <div class="wrong">
         {% if post.wrong == null %}
           -
@@ -78,7 +79,6 @@ title: Anyway.ABC 安妮薇术语小词典
         {% endif %}
 
       </div>
-      <div class="note"><span>{{ post.note }}<span></div>
       </div>
     {% endfor %}
   {% endfor %}
