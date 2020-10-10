@@ -3,3 +3,4 @@ _site/
 builds/
 source/
 /.history/
+.DS_Store
