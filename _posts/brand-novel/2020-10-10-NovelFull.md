@@ -1,8 +1,8 @@
 ---
-word: Readoo
-meaning: 阅读哦哦？
+word: NovelFull
+meaning: 
 correct: /  /
 wrong: 
-note: 
+note: 新颖、完整的小说
 category: 小说品牌
 ---
