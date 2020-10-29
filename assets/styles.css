@@ -499,6 +499,7 @@ h2{
 	}
 	.mt, .mb{
 		height: 20.4rem;
+		display: none;
 	}
 	.mv{
 		width: 20.4rem;
