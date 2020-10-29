@@ -1,6 +1,6 @@
 ---
 layout: production
-title: Anyway.ABC 安妮薇术语小词典
+title: 特爱英汉词典 基于Anyway.ABC 安妮薇术语小词典
 ---
 
 <div class="word-table">
@@ -38,13 +38,6 @@ title: Anyway.ABC 安妮薇术语小词典
       <div>备注</div>
     </div>
 
-    <div class="wrong">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <circle cx="32.001" cy="32" r="30"></circle>
-        <path d="M42.999 21.001l-22 22m22 0L21 21"></path>
-      </svg>
-      <div><span class="mobile-hide">常见</span>错误<span class="mobile-hide">发音</span></div>
-    </div>
 
   </div>
 
@@ -71,14 +64,6 @@ title: Anyway.ABC 安妮薇术语小词典
       </div>
       <div class="meaning">{{ post.meaning }}</div>
       <div class="note"><span>{{ post.note }}<span></div>
-      <div class="wrong">
-        {% if post.wrong == null %}
-          -
-        {% else %}
-          {{ post.wrong }}
-        {% endif %}
-
-      </div>
       </div>
     {% endfor %}
   {% endfor %}
