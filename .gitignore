@@ -4,3 +4,4 @@ builds/
 source/
 /.history/
 .DS_Store
+.jekyll-cache/

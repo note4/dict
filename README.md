@@ -4,3 +4,7 @@
 ![](https://s.anw.red/anyway.abc/preview.png)
 
 网站地址：[**ABC.Anyway.FM**](http://ABC.Anyway.FM)
+
+## 本地运行
+
+bundle exec jekyll server
