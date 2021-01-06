@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en,zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>{{ page.title }} - {{ page.description }}</title>
+    <link href="//ui7.yijile.com/static/css/base.css" rel="stylesheet" />
+    <style type="text/css">
+        @charset "utf-8";
+        html{
+            font-size: 20px;
+        }
+        body{
+            margin: 0 auto;
+            max-width: 32rem;
+            padding: 1rem;
+            box-sizing: border-box;
+            font-size: 0.6rem;
+        }
+        .list-topics li .word{display: inline-block; max-width: 10rem;}
+        footer p{color: rgba(0,0,0,0.6);}
+        footer p a{opacity: 0.6;}
+        footer p a:hover{opacity: 1;}
+        
+        /*响应调试*/
+        @media only screen and (min-width: 480px){
+        /*屏幕宽度大于320px*/
+        
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ page.title }}</h1>
+        <p>{{ page.description }}</p>
+    </header>
+
+    {% if page.list %}
+    <div class="list-topics">
+      <ul class="normal">
+        {% for topics in page.list %}
+        <li>
+            <strong class="word">{{ topics.word }}</strong>
+            {{ topics.meaning }}
+            {{ topics.read }}
+            {{ topics.note }}
+            {{ topics.tags }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>{% endif %}
+
+
+    <footer>
+        <p>灵感与部分 JavaScript 代码源于 <a href="https://abc.anyway.fm/">Anyway.ABC</a></p>
+        <p>怒用牛批的 <a href="https://jekyllrb.com/">Jekyll</a> 构建，无奈地使用 <a href="https://pages.github.com/">Github Pages</a> 实现 Web 访问</p>
+        <p>CSS 重置样式和基础样式懒得使用了自己 10 年前写的 <a href="https://ui7.yijile.com/">UI7</a> <a href="https://github.com/note4/ui7">Github</a></p>
+        <p>© 2020 DICT.teai.org 保留所有权利</p>
+    </footer>
+</body>
+</html>
