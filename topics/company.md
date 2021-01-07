@@ -4,8 +4,10 @@ title: Company
 title_cn: 公司
 description: 知名公司名称单词
 permalink: /company/
-category: 主题
+category: topics
+order: 2
 comments: false
+sidebar: toc
 list:
   - word: Adobe
     meaning: "著名设计软件开发公司"
