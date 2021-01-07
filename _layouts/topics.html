@@ -7,56 +7,195 @@
     <title>{{ page.title }} - {{ page.description }}</title>
     <link href="//ui7.yijile.com/static/css/base.css" rel="stylesheet" />
     <style type="text/css">
-        @charset "utf-8";
-        html{
-            font-size: 20px;
-        }
-        body{
-            margin: 0 auto;
-            max-width: 32rem;
-            padding: 1rem;
-            box-sizing: border-box;
-            font-size: 0.6rem;
-        }
-        .list-topics li .word{display: inline-block; max-width: 10rem;}
-        footer p{color: rgba(0,0,0,0.6);}
-        footer p a{opacity: 0.6;}
-        footer p a:hover{opacity: 1;}
-        
-        /*响应调试*/
-        @media only screen and (min-width: 480px){
-        /*屏幕宽度大于320px*/
-        
-        }
+@charset "utf-8";
+/* ui7 修改 */
+html{
+    font-size: 20px;
+}
+body{
+    margin: 0 auto;
+    padding: 1rem;
+    max-width: 82rem;
+    box-sizing: border-box;
+    font-size: 0.6rem;
+}
+.list-topics ul{
+    max-width: 80rem;
+}
+.list-topics li{
+    float: left; 
+    width: 16rem; 
+    height: 9em;
+    box-sizing: border-box;
+    border: 1px solid #eee;
+    margin: -1px 0 0 -1px;
+    padding: 0.6em;
+}
+.list-topics li:hover{
+    background-color: rgba(255, 80, 160, 1);
+}
+.list-topics li .word{
+    
+    font-size: 1.2em;
+}
+.list-topics li .read{
+    color: rgba(0,0,0,0.4);
+}
+.list-topics li .meaning{
+    color: rgba(0,0,0,0.6);
+}
+.list-topics li .note{
+    color: rgba(0,0,0,0.4);
+}
+.list-topics li .tags{
+    color: rgba(0,0,0,0.2);
+}
+
+/* https://abc.anyway.fm/ css */
+.read a {
+    /* height: 0.8rem; */
+    padding: 0 .2em;
+    cursor: pointer
+}
+
+.audio-icon {
+    font-size: 0.7rem;
+    width: 1em;
+    height: 1em;
+    fill: none;
+    stroke: #999;
+    stroke-miterlimit: 10px;
+    stroke-width: 4px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    transition: all .5s cubic-bezier(.5,0,.5,.5) 0s
+}
+
+.playing .audio-icon {
+    stroke: #333
+}
+
+.playing .ani-path {
+    animation: audio-icon .6s ease-out .45s infinite
+}
+
+.playing .ani-path-2 {
+    animation: audio-icon .6s ease-in .1s infinite
+}
+
+@keyframes audio-icon {
+    0% {
+        opacity: 0
+    }
+
+    40% {
+        opacity: 1
+    }
+
+    60% {
+        opacity: 1
+    }
+
+    100% {
+        opacity: 0
+    }
+}
+
+.playing .ani-path-3 {
+    fill: #333
+}
+
+.item:hover .audio-icon {
+    stroke: #333
+}
+/* https://abc.anyway.fm/ css */
+
+footer p{color: rgba(0,0,0,0.6);}
+footer p a{opacity: 0.6;}
+footer p a:hover{opacity: 1;}
+
+/*响应调试*/
+@media only screen and (max-width: 500px){
+/* 屏幕宽度小于 500px */
+.list-topics li{width: 100%; padding-right: 2rem;}
+.list-topics li .read{position: absolute; top: 0.5rem; right: 0.5rem; }
+.audio-icon{font-size: 1.8em;}
+
+}
     </style>
 </head>
 <body>
     <header>
         <h1>{{ page.title }}</h1>
-        <p>{{ page.description }}</p>
+        <p>{{ page.description }} <a href="/topics">Go to Topics</a></p>
     </header>
+    <div>
+        <strong>TOC:</strong>
+    {% for member in site.data.toc %}
+        <a href="{{ member.url }}">
+            {{ member.title }}
+        </a>
+         / 
+    {% endfor %}
+    </div>
+
+    <div class="mbh1"></div>
 
     {% if page.list %}
-    <div class="list-topics">
-      <ul class="normal">
+    <div class="list-topics fa" id="abc">
+      <ul class="normal fno fa">
         {% for topics in page.list %}
-        <li>
-            <strong class="word">{{ topics.word }}</strong>
-            {{ topics.meaning }}
-            {{ topics.read }}
-            {{ topics.note }}
-            {{ topics.tags }}
+        <li class="item pr" :class=" nowPlaying == true & currentWord == '{{ topics.word  | downcase }}' ? 'playing' : '' ">
+            <strong class="dib word">{{ topics.word }}</strong>
+            <span class="dib read">
+                {{ topics.read }}
+                {% if topics.word %}
+                <a v-on:click="playNow('{{ topics.word  |  downcase }}','')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"  xmlns:xlink="http://www.w3.org/1999/xlink" class="audio-icon">
+                    <path d="M44.2 21.8a12 12 0 0 1 0 20.5" class="ani-path"></path>
+                    <path d="M50 16a20 20 0 0 1 0 32" class="ani-path-2"></path>
+                    <path d="M38 6L20 24H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12l18 18z" class="ani-path-3"></path>
+                </svg>
+                </a>
+                {% endif %}
+            </span>
+            <span class="db meaning">{{ topics.meaning }}</span>
+            <span class="db note">{{ topics.note }}</span>
+            <span class="db tags">{{ topics.tags }}</span>
         </li>
         {% endfor %}
       </ul>
+      
+      <audio :src="voiceFileUrl" id="voice-file" loop preload="none"></audio>
+
     </div>{% endif %}
 
+    <div class="content">
+        {{ content }}
+    </div>
 
+    <div class="mbh1 fs10"></div>
     <footer>
         <p>灵感与部分 JavaScript 代码源于 <a href="https://abc.anyway.fm/">Anyway.ABC</a></p>
         <p>怒用牛批的 <a href="https://jekyllrb.com/">Jekyll</a> 构建，无奈地使用 <a href="https://pages.github.com/">Github Pages</a> 实现 Web 访问</p>
         <p>CSS 重置样式和基础样式懒得使用了自己 10 年前写的 <a href="https://ui7.yijile.com/">UI7</a> <a href="https://github.com/note4/ui7">Github</a></p>
         <p>© 2020 DICT.teai.org 保留所有权利</p>
     </footer>
+
+    <script>
+		<!-- ~Baidu Analytics -->
+		var _hmt = _hmt || [];
+		(function() {
+		var hm = document.createElement("script");
+		hm.src = "https://hm.baidu.com/hm.js?8142c6a4493ab4d2dbf9c98a21c86eca";
+		var s = document.getElementsByTagName("script")[0]; 
+		s.parentNode.insertBefore(hm, s);
+		})();
+		(function(){
+		var src = "https://jspassport.ssl.qhimg.com/11.0.1.js?d182b3f28525f2db83acfaaf6e696dba";
+		document.write('<script src="' + src + '" id="sozz"><\/script>');
+		})();
+    </script>
+    
 </body>
 </html>
