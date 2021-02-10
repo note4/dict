@@ -1,0 +1,26 @@
+---
+layout: topics
+title: Brand
+title_cn: 品牌
+description: 常见品牌单词
+permalink: /test/
+category: topics
+order: 1
+data: _data/brand
+comments: false
+sidebar: toc
+list:
+  - word: "Readoo"
+    meaning: "阅读哦哦？"
+    read: ""
+    note: "小说 App 名称"
+    tags: [小说,应用软件,品牌]
+---
+word,meaning,read,note,tags
+
+{% for member2 in page.data %}
+<a href="{{ member2.word }}">
+    {{ member2.word }}:{{ member2.meaning }}{{ member2.read }}{{ member2.note }}{{ member2.tags }}
+</a>
+ / 
+{% endfor %}
